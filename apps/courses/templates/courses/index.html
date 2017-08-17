@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <title>All Courses</title>
+</head>
+<body>
+
+    <!-- This shows the error messages -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <h1>Add a new course</h1>
+    <form action="{% url 'add' %}" method="post">
+        {% csrf_token %}
+        <label>Name:</label><input type="text" name="name">
+        <p></p>
+        <label>Description:</label><textarea rows="4" cols="55" name="descript"></textarea>
+        <input type="submit" value="Add">
+    </form>
+    <h2>Courses</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses_all %}
+                <tr>
+                    <td>{{ course.course_name }}</td>
+                    <td>{{ course.desc }}</td>
+                    <td>{{ course.created_at }}</td>
+                    <td>
+                        <a href="{% url 'destroy' id=course.id %}">remove</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+</table>
+</body>
+</html>

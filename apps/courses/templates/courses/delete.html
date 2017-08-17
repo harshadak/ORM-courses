@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <title>Delete a Course</title>
+</head>
+<body>
+    <h2>Are you sure you want to delete the followign course?</h2>
+    <h3>Name: {{ course.course_name }}</h3>
+    <h3>Description: {{ course.desc }}</h3>
+
+    <a href="{% url 'index' %}"><button type="button">NO</button></a>
+    <a href="{% url 'confirm' id=course.id %}"><button type="button">Yes! I want to delete this</button></a>
+</body>
+</html>
